@@ -6,10 +6,10 @@ public class VacumActuator {
 	
 	public static final Set<Actions> Actions;
 
-	Set<Actions> actions = new HashSet<Actions>();
-			actions.add(VacuumEnvironment.ACTION_SUCK);
-			actions.add(VacuumEnvironment.ACTION_MOVE_LEFT);
-			actions.add(VacuumEnvironment.ACTION_MOVE_RIGHT);
+	        Set<Actions> actions = new HashSet<Actions>();
+			actions.add(Environment.ACTION_SUCK);
+			actions.add(Environment.ACTION_MOVE_LEFT);
+			actions.add(Environment.ACTION_MOVE_RIGHT);
 	
 	
 	

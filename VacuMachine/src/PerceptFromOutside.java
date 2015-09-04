@@ -1,10 +1,6 @@
-import aima.core.environment.vacuum.VacuumEnvironment;
 
 
-
-
-
-public class PerceptFromOutside {
+public class PerceptFromOutside extends DynamicObjects{
 	
 	public static final String ATTRIBUTE_AGENT_LOCATION = "agentLocation";
 	public static final String ATTRIBUTE_STATE = "locationState";
@@ -31,13 +27,33 @@ public class PerceptFromOutside {
 		return (Environment.LocationState) getAttribute(ATTRIBUTE_STATE);
 	}
 	
-	String getAgentLocation(Agent a)
-	{
-		return a.location;
+	
+	@Override
+	public String describeType() {
+		return PerceptFromOutside.class.getSimpleName();
 	}
-	Environment.LocationState getLocationState(String location)
-	{
-		return location.locationstate;
+
+	/**
+	 * Constructs a DynamicPercept with one attribute
+	 * 
+	 * @param key1
+	 *            the attribute key
+	 * @param value1
+	 *            the attribute value
+	 */
+	public PerceptFromOutside(Object key1, Object value1) {
+		setAttribute(key1, value1);
+	}
+	
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		sb.append(getAgentLocation());
+		sb.append(", ");
+		sb.append(getLocationState());
+		sb.append("]");
+		return sb.toString();
 	}
 }
 

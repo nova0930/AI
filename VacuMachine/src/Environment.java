@@ -1,5 +1,10 @@
 import java.util.Random;
 
+import aima.core.agent.Action;
+import aima.core.agent.Agent;
+import aima.core.agent.EnvironmentState;
+import aima.core.agent.EnvironmentView;
+
 
 
 
@@ -27,7 +32,14 @@ public class Environment {
 	}
 	
 	
-	 void addAgent()
+	protected void updateEnvironmentRepresentation(Agent agent, Actions action,
+			EnvironmentState state) {
+		for (EnvironmentRepresentation view : views) {
+			view.agentActed(agent, action, state);
+		}
+	}
+	
+	 void addAgent(VacumAgent a)
 	 {
 		 
 	 }

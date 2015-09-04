@@ -1,10 +1,17 @@
-
-
-
-
-
+import aima.core.agent.Action;
+import aima.core.agent.Percept;
+import aima.core.agent.impl.NoOpAction;
 
 public class Agent {
+	
+	public Actions execute(PerceptFromOutside p) {
+		
+			return program.execute(p);
+		
+		
+	}
+	
+	
 	boolean isAlive()
 	{
 		
