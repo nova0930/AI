@@ -3,6 +3,7 @@ import java.util.Map;
 
 
 
+
 public class EnvironmentState {
 	
 	int size;      // Can be measured by steps of the agent
@@ -46,6 +47,17 @@ public class EnvironmentState {
 		locationState.put(location, s);
 	}
 	
+	
+	public boolean equals(Object o) {
+		if (o instanceof EnvironmentState) {
+			EnvironmentState s = (EnvironmentState) o;
+			if (this.locationState.equals(s.locationState)
+					&& this.agentLocations.equals(s.agentLocations)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 
 
