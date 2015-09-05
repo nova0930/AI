@@ -1,26 +1,21 @@
-import aima.core.agent.Action;
-import aima.core.agent.Percept;
-import aima.core.agent.impl.NoOpAction;
+import java.util.Random;
+
+
 
 public class Agent {
 	
-	public Actions execute(PerceptFromOutside p) {
-		
-			return program.execute(p);
-		
-		
-	}
 	
+	private boolean alive = true;
 	
 	boolean isAlive()
 	{
-		
+		return alive;
 	}
 
 	
-	void setAlive(boolean alive)
+	void setAlive(boolean live)
 	{
-		
+		alive = live;
 	}
 	
 	public Actions execute(PerceptFromOutside percept) {
@@ -41,4 +36,6 @@ public class Agent {
 		// environment is correct
 		return NoAction.NO_OP;
 	}
+	
+	
 }

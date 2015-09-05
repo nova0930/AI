@@ -1,10 +1,5 @@
 import java.util.Random;
 
-import aima.core.agent.Action;
-import aima.core.agent.Agent;
-import aima.core.agent.EnvironmentState;
-import aima.core.agent.EnvironmentView;
-
 
 
 
@@ -32,17 +27,24 @@ public class Environment {
 	}
 	
 	
-	protected void updateEnvironmentRepresentation(Agent agent, Actions action,
-			EnvironmentState state) {
-		for (EnvironmentRepresentation view : views) {
-			view.agentActed(agent, action, state);
-		}
+	public EnvironmentState addAgent(Agent a, String location) {
+		// Ensure the agent state information is tracked before
+		// adding to super, as super will notify the registered
+		// EnvironmentViews that is was added.
+		envState.setAgentLocation(a, location);
+		System.out.println("Agent added.");
+		return envState;
 	}
 	
-	 void addAgent(VacumAgent a)
-	 {
-		 
-	 }
+	//Add Agent randomly
+	public void addAgent(Agent a) {
+		int idx = new Random().nextInt(2);
+		envState.setAgentLocation(a, idx == 0 ? LOCATION_A : LOCATION_B);
+		System.out.println("Agent added.");
+	}
+	
+	
+	
 	 
 	 void deleteAgent()
 	 {
