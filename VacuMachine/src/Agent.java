@@ -23,12 +23,16 @@ public class Agent {
 
 		// if status = Dirty then return Suck
 		if (Environment.LocationState.Dirty == vep.getLocationState()) {
+			
+			System.out.println("Suck");
 			return Environment.ACTION_SUCK;
 			// else if location = A then return Right
 		} else if (Environment.LOCATION_A == vep.getAgentLocation()) {
+			System.out.println("Move Right");
 			return Environment.ACTION_MOVE_RIGHT;
 		} else if (Environment.LOCATION_B == vep.getAgentLocation()) {
 			// else if location = B then return Left
+			System.out.println("Move Left");
 			return Environment.ACTION_MOVE_LEFT;
 		}
 

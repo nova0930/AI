@@ -3,12 +3,7 @@ import java.util.Map;
 
 public class DynamicObjects {
 	
-	private Map<Object, Object> attributes = new LinkedHashMap<Object, Object>();
-	
-	
-	
-	
-	
+	private Map<Object, Object> attributes = new LinkedHashMap<Object, Object>();	
 	public void setAttribute(Object key, Object value) {
 		attributes.put(key, value);
 	}

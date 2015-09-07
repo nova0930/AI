@@ -22,8 +22,7 @@ public class EnvironmentState {
 		agentLocations = new LinkedHashMap<Agent, String>();
 	}
 	
-	public EnvironmentState(Environment.LocationState locAState,
-			Environment.LocationState locBState) {
+	public EnvironmentState(Environment.LocationState locAState,Environment.LocationState locBState) {
 		// TODO Auto-generated constructor stub
 		this();
 		locationState.put(Environment.LOCATION_A, locAState);
