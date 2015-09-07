@@ -83,8 +83,6 @@ public class Environment {
 				updateScoreMeasure(a, 10);
 			}
 		} else if (agentAction.isNoOp()) {
-			// In the Vacuum Environment we consider things done if
-			// the agent generates a NoOp.
 		//	isDone = true;
 		}
 
