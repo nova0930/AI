@@ -2,6 +2,7 @@
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Represents a state in the Vacuum World
@@ -13,6 +14,8 @@ public class State  {
 
 	private Map<String, int[]> state;
 	private Map<Boat, String> boatLocations;
+	public Set<State> parentState;
+	public Set<State> childState;
 	public int[] anArray= new int[3];
 
 	
@@ -47,7 +50,38 @@ public class State  {
 	public void setLocationState(String location,int[] s) {
 		state.put(location, s);
 	}
-/*
+	
+
+
+	@Override
+	public String toString() {
+		return this.state.toString();
+	}
+	
+	
+	public boolean checkViolate()
+	{
+		
+		
+		
+		if((getLocationState(Environment.SIDE_A)[1]-getLocationState(Environment.SIDE_A)[0]>0) || (getLocationState(Environment.SIDE_B)[1]-getLocationState(Environment.SIDE_B)[0]>0))
+		
+			return true;
+		//else if ((getLocationState(Environment.SIDE_A)[1]-getLocationState(Environment.SIDE_A)[0]<=0) && (getLocationState(Environment.SIDE_B)[1]-getLocationState(Environment.SIDE_B)[0]<=0))
+		  //  violate = false;
+		
+		
+		return false;
+	}
+	
+	//public State updateState(int[]sideA, int[]sideB)
+	//{
+		
+		//setLocationState(Environment.SIDE_A,sideA);
+		//setLocationState(Environment.SIDE_B,sideA);
+	//}
+	
+	/*
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof State) {
@@ -66,8 +100,6 @@ public class State  {
 	 * 
 	 * @return a string representation of the environment
 	 */
-	@Override
-	public String toString() {
-		return this.state.toString();
-	}
+	
+
 }

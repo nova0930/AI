@@ -1,6 +1,5 @@
 import java.util.List;
 
-import aima.core.agent.Action;
 
 interface Problem {
 	
