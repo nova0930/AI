@@ -15,8 +15,6 @@ public class testGoal {
 		 int[] A= new int[]{0,0,0};
 		// setup
 		State goalState = (State) state;
-		String currentLocation = goalState.getBoatLocation(this.agent);
-		
 		// test goal state
 		if ((goalState.getLocationState(Environment.SIDE_A).equals(A)) && (goalState.getLocationState(Environment.SIDE_B).equals(B))) {
         	return true;

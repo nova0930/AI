@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 
@@ -15,179 +18,183 @@ public class Environment {
 	
 	public int[] anArrayA= new int[]{3,3,1};
 	public int[] anArrayB= new int[]{0,0,0};
-	public Queue<State> stateQueue;
+	public Queue<State> stateQueue =  new LinkedList<State>();
+	public Queue<State> solutionQueue = new LinkedList<State>();
 	
 	protected State envState = null;
 	public State root = null;
+//	public testGoal done = new testGoal(a);
 	
 	public Environment() {
 		
 		envState = new State(anArrayA, anArrayB);
 		root = envState;
-		stateQueue.add(root);
+		stateQueue.add(envState);
 	}
-
+	
 	
 	public State executeAction(Boat a, Action agentAction) {
-		envState = stateQueue.poll();
-		State tempState = null;
+		
+	
+		envState = stateQueue.peek();
+		
+		if(envState.isGoalState(envState))
+	    {   
+	    	System.out.println("Sucessfull");
+	    	return envState;
+	    }
+		
+		State newState = new State();
+		//State tempState1 = null;
+		//tempState1 = envState;
+	    //State tempState2 = null;
+		
 
 		if (M1_C1 == agentAction) {
 			
 			String tempLoc =envState.getBoatLocation(a); 
 			if(tempLoc == "A")
 			{
-				envState.getLocationState(SIDE_A)[0] = envState.getLocationState(SIDE_A)[0]-1;
-				envState.getLocationState(SIDE_A)[1] = envState.getLocationState(SIDE_A)[1]-1;
-				envState.getLocationState(SIDE_A)[2] = 0;
+				newState.getLocationState(SIDE_A)[0] = envState.getLocationState(SIDE_A)[0]-1;
+				newState.getLocationState(SIDE_A)[1] = envState.getLocationState(SIDE_A)[1]-1;
+				newState.getLocationState(SIDE_A)[2] = 0;
 				
-				envState.getLocationState(SIDE_B)[0] = envState.getLocationState(SIDE_B)[0]+1;
-				envState.getLocationState(SIDE_B)[1] = envState.getLocationState(SIDE_B)[1]+1;
-				envState.getLocationState(SIDE_B)[2] = 1;
+				newState.getLocationState(SIDE_B)[0] = envState.getLocationState(SIDE_B)[0]+1;
+				newState.getLocationState(SIDE_B)[1] = envState.getLocationState(SIDE_B)[1]+1;
+				newState.getLocationState(SIDE_B)[2] = 1;
 				
-			    envState.setAgentLocation(a, SIDE_B);
+				newState.setBoatLocation(a, SIDE_B);
 			}
 			else
 			{
-				envState.getLocationState(SIDE_B)[0] = envState.getLocationState(SIDE_B)[0]-1;
-				envState.getLocationState(SIDE_B)[1] = envState.getLocationState(SIDE_B)[1]-1;
-				envState.getLocationState(SIDE_B)[2] = 0;
+				newState.getLocationState(SIDE_B)[0] = envState.getLocationState(SIDE_B)[0]-1;
+				newState.getLocationState(SIDE_B)[1] = envState.getLocationState(SIDE_B)[1]-1;
+				newState.getLocationState(SIDE_B)[2] = 0;
 				
-				envState.getLocationState(SIDE_A)[0] = envState.getLocationState(SIDE_A)[0]+1;
-				envState.getLocationState(SIDE_A)[1] = envState.getLocationState(SIDE_A)[1]+1;
-				envState.getLocationState(SIDE_A)[2] = 1;
+				newState.getLocationState(SIDE_A)[0] = envState.getLocationState(SIDE_A)[0]+1;
+				newState.getLocationState(SIDE_A)[1] = envState.getLocationState(SIDE_A)[1]+1;
+				newState.getLocationState(SIDE_A)[2] = 1;
 				
-			envState.setAgentLocation(a, SIDE_A);
+				newState.setBoatLocation(a, SIDE_A);
 			}
 			
-			if(!envState.checkViolate())
-			{
-			    envState.setLocationState(Environment.SIDE_A, envState.getLocationState(SIDE_A));
-			    envState.setLocationState(Environment.SIDE_B, envState.getLocationState(SIDE_B));
+			
+				envState.testAdd(envState.childState, newState);
 			    
-			    envState.childState.add(tempState);
-			}
+			
+			    
 		} 
 		else if (M2 == agentAction) {
 			String tempLoc =envState.getBoatLocation(a); 
 			if(tempLoc == "A")
 			{
-				envState.getLocationState(SIDE_A)[0] = envState.getLocationState(SIDE_A)[0]-2;
-				envState.getLocationState(SIDE_A)[2] = 0;
+				newState.getLocationState(SIDE_A)[0] = envState.getLocationState(SIDE_A)[0]-2;
+				newState.getLocationState(SIDE_A)[2] = 0;
 				
-				envState.getLocationState(SIDE_B)[0] = envState.getLocationState(SIDE_B)[0]+2;
-				envState.getLocationState(SIDE_B)[2] = 1;
+				newState.getLocationState(SIDE_B)[0] = envState.getLocationState(SIDE_B)[0]+2;
+				newState.getLocationState(SIDE_B)[2] = 1;
 				
-			    envState.setAgentLocation(a, SIDE_B);
+				newState.setBoatLocation(a, SIDE_B);
 			}
 			else
 			{
-				envState.getLocationState(SIDE_B)[0] = envState.getLocationState(SIDE_B)[0]-2;
-				envState.getLocationState(SIDE_B)[2] = 0;
+				newState.getLocationState(SIDE_B)[0] = envState.getLocationState(SIDE_B)[0]-2;
+				newState.getLocationState(SIDE_B)[2] = 0;
 				
-				envState.getLocationState(SIDE_A)[0] = envState.getLocationState(SIDE_A)[0]+2;
-				envState.getLocationState(SIDE_A)[2] = 1;
+				newState.getLocationState(SIDE_A)[0] = envState.getLocationState(SIDE_A)[0]+2;
+				newState.getLocationState(SIDE_A)[2] = 1;
 				
-			    envState.setAgentLocation(a, SIDE_A);
+				newState.setBoatLocation(a, SIDE_A);
 			    
-			    if(!envState.checkViolate())
-				{
-				    envState.setLocationState(Environment.SIDE_A, envState.getLocationState(SIDE_A));
-				    envState.setLocationState(Environment.SIDE_B, envState.getLocationState(SIDE_B));
-				    envState.parentState.add(tempState);
-				}
+				
+				    
+				    
 			}
+			
+			envState.testAdd(envState.childState, newState);
 		} 
 		else if (C2 == agentAction) {
 			String tempLoc =envState.getBoatLocation(a); 
 			if(tempLoc == "A")
 			{
-				envState.getLocationState(SIDE_A)[1] = envState.getLocationState(SIDE_A)[0]-2;
-				envState.getLocationState(SIDE_A)[2] = 0;
+				newState.getLocationState(SIDE_A)[1] = envState.getLocationState(SIDE_A)[1]-2;
+				newState.getLocationState(SIDE_A)[2] = 0;
 				
-				envState.getLocationState(SIDE_B)[1] = envState.getLocationState(SIDE_B)[0]+2;
-				envState.getLocationState(SIDE_B)[2] = 1;
+				newState.getLocationState(SIDE_B)[1] = envState.getLocationState(SIDE_B)[1]+2;
+				newState.getLocationState(SIDE_B)[2] = 1;
 				
-			    envState.setAgentLocation(a, SIDE_B);
+				newState.setBoatLocation(a, SIDE_B);
 			}
 			else
 			{
-				envState.getLocationState(SIDE_B)[1] = envState.getLocationState(SIDE_B)[0]-2;
-				envState.getLocationState(SIDE_B)[2] = 0;
+				newState.getLocationState(SIDE_B)[1] = envState.getLocationState(SIDE_B)[1]-2;
+				newState.getLocationState(SIDE_B)[2] = 0;
 				
-				envState.getLocationState(SIDE_A)[1] = envState.getLocationState(SIDE_A)[0]+2;
-				envState.getLocationState(SIDE_A)[2] = 1;
+				newState.getLocationState(SIDE_A)[1] = envState.getLocationState(SIDE_A)[1]+2;
+				newState.getLocationState(SIDE_A)[2] = 1;
 				
-			    envState.setAgentLocation(a, SIDE_A);
-			    if(!envState.checkViolate())
-				{
-				    envState.setLocationState(Environment.SIDE_A, envState.getLocationState(SIDE_A));
-				    envState.setLocationState(Environment.SIDE_B, envState.getLocationState(SIDE_B));
-				    envState.parentState.add(tempState);
-				}
+				newState.setBoatLocation(a, SIDE_A);
+				//if(!envState.checkViolate())
+				
 			}
+			
+			envState.testAdd(envState.childState, newState);
 		} 
 		else if (C1 == agentAction) {
 			String tempLoc =envState.getBoatLocation(a); 
 			if(tempLoc == "A")
 			{
-				envState.getLocationState(SIDE_A)[1] = envState.getLocationState(SIDE_A)[1]-1;
-				envState.getLocationState(SIDE_A)[2] = 0;
+				newState.getLocationState(SIDE_A)[1] = envState.getLocationState(SIDE_A)[1]-1;
+				newState.getLocationState(SIDE_A)[2] = 0;
 				
-				envState.getLocationState(SIDE_B)[1] = envState.getLocationState(SIDE_B)[1]+1;
-				envState.getLocationState(SIDE_B)[2] = 1;
+				newState.getLocationState(SIDE_B)[1] = envState.getLocationState(SIDE_B)[1]+1;
+				newState.getLocationState(SIDE_B)[2] = 1;
 				
-			    envState.setAgentLocation(a, SIDE_B);
+				newState.setBoatLocation(a, SIDE_B);
 			}
 			else
 			{
-				envState.getLocationState(SIDE_B)[1] = envState.getLocationState(SIDE_B)[1]-1;
-				envState.getLocationState(SIDE_B)[2] = 0;
+				newState.getLocationState(SIDE_B)[1] = envState.getLocationState(SIDE_B)[1]-1;
+				newState.getLocationState(SIDE_B)[2] = 0;
 				
-				envState.getLocationState(SIDE_A)[1] = envState.getLocationState(SIDE_A)[0]+1;
-				envState.getLocationState(SIDE_A)[2] = 1;
+				newState.getLocationState(SIDE_A)[1] = envState.getLocationState(SIDE_A)[1]+1;
+				newState.getLocationState(SIDE_A)[2] = 1;
 				
-			    envState.setAgentLocation(a, SIDE_A);
-			    if(!envState.checkViolate())
-				{
-				    envState.setLocationState(Environment.SIDE_A, envState.getLocationState(SIDE_A));
-				    envState.setLocationState(Environment.SIDE_B, envState.getLocationState(SIDE_B));
-				    envState.parentState.add(tempState);
-				}
+				newState.setBoatLocation(a, SIDE_A);
+				//if(!envState.checkViolate())
+				
 			}
+			envState.testAdd(envState.childState, newState);
 		} 
 		else if (M1 == agentAction) {
 			String tempLoc =envState.getBoatLocation(a); 
 			if(tempLoc == "A")
 			{
-				envState.getLocationState(SIDE_A)[0] = envState.getLocationState(SIDE_A)[0]-1;
-				envState.getLocationState(SIDE_A)[2] = 0;
+				newState.getLocationState(SIDE_A)[0] = envState.getLocationState(SIDE_A)[0]-1;
+				newState.getLocationState(SIDE_A)[2] = 0;
 				
-				envState.getLocationState(SIDE_B)[0] = envState.getLocationState(SIDE_B)[0]+1;
-				envState.getLocationState(SIDE_B)[2] = 1;
+				newState.getLocationState(SIDE_B)[0] = envState.getLocationState(SIDE_B)[0]+1;
+				newState.getLocationState(SIDE_B)[2] = 1;
 				
-			    envState.setAgentLocation(a, SIDE_B);
+				newState.setBoatLocation(a, SIDE_B);
 			}
 			else
 			{
-				envState.getLocationState(SIDE_B)[0] = envState.getLocationState(SIDE_B)[0]-1;
-				envState.getLocationState(SIDE_B)[2] = 0;
+				newState.getLocationState(SIDE_B)[0] = envState.getLocationState(SIDE_B)[0]-1;
+				newState.getLocationState(SIDE_B)[2] = 0;
 				
-				envState.getLocationState(SIDE_A)[0] = envState.getLocationState(SIDE_A)[0]+1;
-				envState.getLocationState(SIDE_A)[2] = 1;
+				newState.getLocationState(SIDE_A)[0] = envState.getLocationState(SIDE_A)[0]+1;
+				newState.getLocationState(SIDE_A)[2] = 1;
 				
-			    envState.setAgentLocation(a, SIDE_A);
+				newState.setBoatLocation(a, SIDE_A);
 			    
-			    if(!envState.checkViolate())
-				{
-				    envState.setLocationState(Environment.SIDE_A, envState.getLocationState(SIDE_A));
-				    envState.setLocationState(Environment.SIDE_B, envState.getLocationState(SIDE_B));
-				    envState.parentState.add(tempState);
-				}
+				//if(!envState.checkViolate())
+				
 			}
+			envState.testAdd(envState.childState, newState);
 		} 
 		
-
+		
 		return envState;
 	}
 	public Environment(int[] locAState, int[] locBState) {
@@ -195,9 +202,20 @@ public class Environment {
 	}
 
 	
+	
 	public State getCurrentState() {
 		return envState;
 	}
+
+	public State addBoat(Boat a, String location) {
+		envState.setBoatLocation(a, location);
+		System.out.println("Agent added to specific location.");
+		return envState;
+	}
+	 String getBoatLocation(Boat a)
+	 {
+		 return envState.getBoatLocation(a);
+	 }
 	
 	
 	
