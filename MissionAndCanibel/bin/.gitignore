@@ -1,10 +1,8 @@
 /Action.class
 /Boat.class
+/BreadthFirstSearch.class
 /Environment.class
 /Problem.class
 /State.class
-/testGoal.class
 /TestMissionAndCanibel.class
-/TestDemo.class
-/Frontier.class
-/BreadthFirstSearch.class
+/testGoal.class

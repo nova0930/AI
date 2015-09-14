@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TestMissionAndCanibel {
@@ -15,7 +16,7 @@ public class TestMissionAndCanibel {
 		
 		
 		BreadthFirstSearch bfs = new BreadthFirstSearch();
-		State solution = bfs.exec(env.envState);
+		State solution = bfs.exec(env.envState, a);
 		printSolution(solution);
 			
 		
@@ -39,9 +40,12 @@ public class TestMissionAndCanibel {
 			for (int i = depth; i >= 0; i--) {
 				state = path.get(i);
 				if (state.isGoal()) {
-					System.out.print(state.toString());
+					System.out.print(Arrays.toString(state.getLocationState(Environment.SIDE_A)));
+					System.out.print(Arrays.toString(state.getLocationState(Environment.SIDE_B)));
 				} else {
-					System.out.print(state.toString() + " -> ");
+					System.out.print(Arrays.toString(state.getLocationState(Environment.SIDE_A)));
+					System.out.print(Arrays.toString(state.getLocationState(Environment.SIDE_B)));
+					//System.out.print(state.toString() + " -> ");
 				}
 			}
 			System.out.println("\nDepth: " + depth);
